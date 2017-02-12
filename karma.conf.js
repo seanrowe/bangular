@@ -21,10 +21,8 @@ module.exports = function(config) {
         './node_modules/angular-ui-router/release/angular-ui-router.js',
         './node_modules/angular-mocks/angular-mocks.js',
         './app/app.js',
-        "./app/directives/containers.js",
-        './app/directives/grids.js',
-        "./spec/grids.spec.js",
-        "./spec/containers.spec.js"
+        "./app/directives/*.js",
+        './spec/*.spec.js'
     ],
 
 
