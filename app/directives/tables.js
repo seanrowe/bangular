@@ -1,9 +1,16 @@
 (function Tables(module) {
     (function Table() {
-        var controller = function() {
+        /**
+         * controller
+         */
+        var controller = function() {};
 
-        };
-
+        /**
+         * link
+         * @param scope
+         * @param element
+         * @param attrs
+         */
         var link = function(scope, element, attrs) {
             if ("striped" in attrs) {
                 element.addClass("table-striped");
@@ -22,14 +29,22 @@
             }
 
             if ("responsive" in attrs) {
-                element.wrap("<div class='table-responsive'></div>")
+                element.wrap("<div class='table-responsive'></div>");
             }
         };
 
+        /**
+         * template
+         * @returns {string}
+         */
         var template = function() {
             return "<table class='table' ng-transclude></table>";
         };
 
+        /**
+         * constructor
+         * @returns {{link: link, controller: controller, template: template, restrict: string, transclude: boolean, replace: boolean, require: [string,string]}}
+         */
         var constructor = function() {
             return {
                 link: link,
@@ -46,18 +61,28 @@
     }());
 
     (function Header() {
-        var controller = function() {
+        /**
+         * controller
+         */
+        var controller = function() {};
 
-        };
+        /**
+         * link
+         */
+        var link = function() {};
 
-        var link = function() {
-
-        };
-
+        /**
+         * template
+         * @returns {string}
+         */
         var template = function() {
-
+            return "<thead ng-transclude></thead>";
         };
 
+        /**
+         * constructor
+         * @returns {{link: link, controller: controller, template: template, restrict: string, transclude: boolean, require: [string,string]}}
+         */
         var constructor = function() {
             return {
                 link: link,
@@ -65,6 +90,7 @@
                 template: template,
                 restrict: "E",
                 transclude: true,
+                replace: true,
                 require: ["bgTableHeader", "^^bgTable"]
             };
         };
@@ -73,18 +99,28 @@
     }());
 
     (function Body() {
-        var controller = function() {
+        /**
+         * controller
+         */
+        var controller = function() {};
 
-        };
+        /**
+         * link
+         */
+        var link = function() {};
 
-        var link = function() {
-
-        };
-
+        /**
+         * template
+         * @returns {string}
+         */
         var template = function() {
-
+            return "<tbody ng-transclude></tbody>";
         };
 
+        /**
+         * constructor
+         * @returns {{link: link, controller: controller, template: template, restrict: string, transclude: boolean, require: [string,string]}}
+         */
         var constructor = function() {
             return {
                 link: link,
@@ -92,6 +128,7 @@
                 template: template,
                 restrict: "E",
                 transclude: true,
+                replace: true,
                 require: ["bgTableBody", "^^bgTable"]
             };
         };
@@ -100,21 +137,32 @@
     }());
 
     (function Footer() {
-        var controller = function() {
+        /**
+         * controller
+         */
+        var controller = function() {};
 
-        };
+        /**
+         * link
+         */
+        var link = function() {};
 
-        var link = function() {
-
-        };
-
+        /**
+         * template
+         * @returns {string}
+         */
         var template = function() {
-
+            return "<tfoot ng-transclude></tfoot>";
         };
 
+        /**
+         * constructor
+         * @returns {{link: link, controller: controller, template: template, restrict: string, transclude: boolean, require: [string,string]}}
+         */
         var constructor = function() {
             return {
                 link: link,
+                replace: true,
                 controller: controller,
                 template: template,
                 restrict: "E",
@@ -127,18 +175,60 @@
     }());
 
     (function Row() {
-        var controller = function() {
+        /**
+         * controller
+         */
+        var controller = function() {};
 
+        /**
+         * link
+         * @param scope
+         * @param element
+         * @param attrs
+         * @param ctrls
+         */
+        var link = function(scope, element, attrs, ctrls) {
+            var header = ctrls[1];
+            var body = ctrls[2];
+            var footer = ctrls[3];
+
+            if (!header && !body && !footer) {
+                throw new Error("bg-table-row tag must be used inside bg-table-header, bg-table-body, or bg-table-row")
+            }
+
+            if ("active" in attrs) {
+                element.addClass("active");
+            }
+
+            else if ("success" in attrs) {
+                element.addClass("success");
+            }
+
+            else if ("info" in attrs) {
+                element.addClass("info");
+            }
+
+            else if ("warning" in attrs) {
+                element.addClass("warning");
+            }
+
+            else if ("danger" in attrs) {
+                element.addClass("danger");
+            }
         };
 
-        var link = function() {
-
-        };
-
+        /**
+         * template
+         * @returns {string}
+         */
         var template = function() {
-
+            return "<tr ng-transclude></tr>";
         };
 
+        /**
+         * constructor
+         * @returns {{link: link, controller: controller, template: template, restrict: string, transclude: boolean, replace: boolean, require: [string,string,string,string]}}
+         */
         var constructor = function() {
             return {
                 link: link,
@@ -146,6 +236,7 @@
                 template: template,
                 restrict: "E",
                 transclude: true,
+                replace: true,
                 require: [
                     "bgTableRow",
                     "?^^bgTableHeader",
@@ -159,16 +250,24 @@
     }());
 
     (function Column() {
-        var controller = function() {
+        /**
+         * controller
+         */
+        var controller = function() {};
 
-        };
-
-        var link = function() {
+        /**
+         * link
+         * @param scope
+         * @param element
+         * @param attrs
+         * @param ctrls
+         */
+        var link = function(scope, element, attrs, ctrls) {
 
         };
 
         var template = function() {
-
+            return
         };
 
         var constructor = function() {
@@ -178,12 +277,13 @@
                 template: template,
                 restrict: "E",
                 transclude: true,
+                replace: true,
                 require: [
                     "bgTableColumn",
+                    "^^bgTableRow",
                     "?^^bgTableHeader",
                     "?^^bgTableBody",
-                    "?^^bgTableFooter",
-                    "^^bgTableRow"
+                    "?^^bgTableFooter"
                 ]
             };
         };

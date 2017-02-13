@@ -40,7 +40,7 @@ describe("The bg-table directive", function () {
         }
 
         expect($exceptionHandler.errors).toEqual([]);
-        expect(node.hasClass("table")).toBe(true);
+        expect(table.hasClass("table")).toBe(true);
     });
 
     it("should be a table with the class 'table-striped'", function () {
@@ -55,8 +55,8 @@ describe("The bg-table directive", function () {
         }
 
         expect($exceptionHandler.errors).toEqual([]);
-        expect(node.hasClass("table")).toBe(true);
-        expect(node.hasClass("table-striped")).toBe(true);
+        expect(table.hasClass("table")).toBe(true);
+        expect(table.hasClass("table-striped")).toBe(true);
     });
 
     it("should be a table with the class 'table-bordered'", function () {
@@ -71,8 +71,8 @@ describe("The bg-table directive", function () {
         }
 
         expect($exceptionHandler.errors).toEqual([]);
-        expect(node.hasClass("table")).toBe(true);
-        expect(node.hasClass("table-bordered")).toBe(true);
+        expect(table.hasClass("table")).toBe(true);
+        expect(table.hasClass("table-bordered")).toBe(true);
     });
 
     it("should be a table with the class 'table-hover'", function () {
@@ -87,8 +87,8 @@ describe("The bg-table directive", function () {
         }
 
         expect($exceptionHandler.errors).toEqual([]);
-        expect(node.hasClass("table")).toBe(true);
-        expect(node.hasClass("table-hover")).toBe(true);
+        expect(table.hasClass("table")).toBe(true);
+        expect(table.hasClass("table-hover")).toBe(true);
     });
 
     it("should be a table with the class 'table-condensed'", function () {
@@ -103,23 +103,26 @@ describe("The bg-table directive", function () {
         }
 
         expect($exceptionHandler.errors).toEqual([]);
-        expect(node.hasClass("table")).toBe(true);
-        expect(node.hasClass("table-condensed")).toBe(true);
+        expect(table.hasClass("table")).toBe(true);
+        expect(table.hasClass("table-condensed")).toBe(true);
     });
 
     it("should be a table surrounded by a div that has the class 'table-responsive'", function () {
         var node,
+            table,
             div;
 
         try {
-            div = $compile("<bg-container><bg-table responsive></bg-table></bg-container>")($rootScope);
-            node = div.find("div.table");
+            node = $compile("<bg-container><bg-table responsive></bg-table></bg-container>")($rootScope);
+            div = node.find("div");
+            table = div.find("table");
+
         } catch (e) {
             $exceptionHandler(e);
         }
 
         expect($exceptionHandler.errors).toEqual([]);
-        expect(node.hasClass("table")).toBe(true);
+        expect(table.hasClass("table")).toBe(true);
         expect(div.hasClass("table-responsive")).toBe(true);
     });
 });
